@@ -19,7 +19,7 @@ const Header = (props) => {
         <header>
             <h1 className="header-text">Hacker News</h1>
             <nav>
-                {(props.currentPage == 1) && <button disabled onClick={handlePrev}>Prev 25</button>}
+                {(props.currentPage === 1) && <button disabled onClick={handlePrev}>Prev 25</button>}
                 {(props.currentPage !== 1) && <button onClick={handlePrev}>Prev 25</button>}
                 <input type="text" name="filter" id="filter" onChange={handleChange} placeholder="Filter stories..." />
                 <button onClick={handleNext}>Next 25</button>
