@@ -7,21 +7,23 @@ class StoriesContainer extends React.Component {
         super(props);
         this.state = {
             stories: [],
-            filteredStories: []
+            filteredStories: [],
+            currentPage: 1
         }
         this.handleFilterChange = this.handleFilterChange.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
     }
 
     componentDidMount() {
-        this.fetchStories();
+        this.fetchStories(0);
     }
 
-    fetchStories() {
+    fetchStories(index) {
         const urlId = 'https://hacker-news.firebaseio.com/v0/topstories.json'
         fetch(urlId)
             .then(res => res.json())
             .then(data => {
-                const promises = data.slice(0, 50).map((storyId) => {
+                const promises = data.slice(index, index + 10).map((storyId) => {
                     return (
                         fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
                             .then(res => res.json())
@@ -42,10 +44,16 @@ class StoriesContainer extends React.Component {
         }
     }
 
+    handlePageChange(page) {
+        const index = (page * 10) - 10;
+        this.setState({ currentPage: page });
+        this.fetchStories(index);
+    }
+
     render() {
         return (
             <div className="stories-container">
-                <Header onFilterChange={this.handleFilterChange} />
+                <Header onFilterChange={this.handleFilterChange} currentPage={this.state.currentPage} onPageChange={this.handlePageChange} />
                 <StoriesList stories={this.state.filteredStories} />
             </div>
         );
