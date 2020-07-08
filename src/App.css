@@ -1,0 +1,51 @@
+html, body {
+    background: linear-gradient(to bottom, #2193b0, #b5edfa) fixed;
+    height: 100vh;
+    color: #122719;
+}
+.stories-container {
+    font-family: 'Roboto Mono', monotype;
+   
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+button, input {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0 15px;
+}
+
+ul {
+    list-style: none;
+    margin: 3px;
+    padding:1rem 0 0 4rem;
+}
+
+li {
+    padding: 4px;
+    margin: 4px;
+}
+
+a {
+    color: #122719;
+    text-decoration: none;
+}
+
+a:hover , a:active {
+    font-weight: bolder;
+    text-shadow: 3px 3px 3px #12271933;
+}
+
+p {
+    padding-top:4rem;
+    padding-left:4rem;
+}

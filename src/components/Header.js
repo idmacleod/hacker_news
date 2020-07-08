@@ -17,10 +17,13 @@ const Header = (props) => {
 
     return (
         <header>
-            <h1>Hacker News</h1>
-            {(props.currentPage !== 1) && <button onClick={handlePrev}>Prev 10</button>}
-            <input type="text" name="filter" id="filter" onChange={handleChange} />
-            <button onClick={handleNext}>Next 10</button>
+            <h1 className="header-text">Hacker News</h1>
+            <nav>
+                {(props.currentPage == 1) && <button disabled onClick={handlePrev}>Prev 25</button>}
+                {(props.currentPage !== 1) && <button onClick={handlePrev}>Prev 25</button>}
+                <input type="text" name="filter" id="filter" onChange={handleChange} placeholder="Filter stories..." />
+                <button onClick={handleNext}>Next 10</button>
+            </nav>
         </header>
     );
 }

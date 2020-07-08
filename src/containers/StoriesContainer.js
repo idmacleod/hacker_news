@@ -23,7 +23,7 @@ class StoriesContainer extends React.Component {
         fetch(urlId)
             .then(res => res.json())
             .then(data => {
-                const promises = data.slice(index, index + 10).map((storyId) => {
+                const promises = data.slice(index, index + 25).map((storyId) => {
                     return (
                         fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
                             .then(res => res.json())
@@ -45,7 +45,7 @@ class StoriesContainer extends React.Component {
     }
 
     handlePageChange(page) {
-        const index = (page * 10) - 10;
+        const index = (page * 25) - 25;
         this.setState({ currentPage: page });
         this.fetchStories(index);
     }
@@ -55,6 +55,7 @@ class StoriesContainer extends React.Component {
             <div className="stories-container">
                 <Header onFilterChange={this.handleFilterChange} currentPage={this.state.currentPage} onPageChange={this.handlePageChange} />
                 <StoriesList stories={this.state.filteredStories} />
+                <p>© Team Awesome {new Date().getFullYear()}</p>
             </div>
         );
     }
