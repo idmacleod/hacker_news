@@ -18,7 +18,7 @@ const Header = (props) => {
     return (
         <header>
             <h1>Hacker News</h1>
-            <button onClick={handlePrev}>Prev 10</button>
+            {(props.currentPage !== 1) && <button onClick={handlePrev}>Prev 10</button>}
             <input type="text" name="filter" id="filter" onChange={handleChange} />
             <button onClick={handleNext}>Next 10</button>
         </header>
