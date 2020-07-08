@@ -7,7 +7,7 @@ const StoriesList = (props) => {
     })
 
     return (
-        <ul>
+        <ul >
             {storyNodes}
         </ul>
     );
