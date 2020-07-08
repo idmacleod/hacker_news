@@ -7,7 +7,7 @@ class StoriesContainer extends React.Component {
         super(props);
         this.state = {
             stories: [],
-            filter: ''
+            filteredStories: []
         }
         this.handleFilterChange = this.handleFilterChange.bind(this);
     }
@@ -21,26 +21,32 @@ class StoriesContainer extends React.Component {
         fetch(urlId)
             .then(res => res.json())
             .then(data => {
-                const promises = data.slice(0 ,50).map((storyId) => {
+                const promises = data.slice(0, 50).map((storyId) => {
                     return (
                         fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
                             .then(res => res.json())
                     );
                 });
                 Promise.all(promises)
-                    .then(stories => this.setState({stories: stories}))
+                    .then(stories => this.setState({ stories: stories, filteredStories: stories }))
             });
     }
 
-    handleFilterChange(title) {
-        this.setState({filter: title});
+    handleFilterChange(event) {
+        const filter = event.target.value.toLowerCase();
+        if (filter) {
+            const filteredStories = this.state.stories.filter(story => story.title.toLowerCase().includes(filter));
+            this.setState({ filteredStories: filteredStories });
+        } else {
+            this.setState({ filteredStories: this.state.stories });
+        }
     }
 
     render() {
         return (
             <div className="stories-container">
                 <Header onFilterChange={this.handleFilterChange} />
-                <StoriesList stories={this.state.stories} />
+                <StoriesList stories={this.state.filteredStories} />
             </div>
         );
     }

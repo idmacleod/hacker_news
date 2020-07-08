@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Header = (props) => {
-    const handleChange = e => {
-        props.onFilterChange(e.target.value);
+    const handleChange = event => {
+        props.onFilterChange(event);
     }
 
     return (
